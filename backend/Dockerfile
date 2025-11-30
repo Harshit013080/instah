@@ -13,6 +13,11 @@ RUN apt-get update && apt-get install -y \
     libcups2 \
     libxcomposite1 \
     libxdamage1 \
+    libasound2 \
+    libxrandr2 \
+    libx11-xcb1 \
+    libxfixes3 \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -23,7 +28,7 @@ COPY package*.json ./
 # Install Node.js dependencies
 RUN npm install
 
-# Install Playwright browsers (this will persist in the image)
+# Install Playwright browsers
 RUN npx playwright install chromium
 
 # Copy application code
@@ -34,4 +39,3 @@ EXPOSE 3000
 
 # Start server
 CMD ["npm", "start"]
-
